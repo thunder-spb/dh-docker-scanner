@@ -1,2 +1,4 @@
-dockle.json
-junit-report.xml
+dockle*.json
+hadolint*.json
+junit*.xml
+.mypy_cache

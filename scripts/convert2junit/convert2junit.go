@@ -11,15 +11,16 @@ import (
 )
 
 var (
-	inFile  = flag.String("in-file", "", "specify an input file name to read from")
-	outFile = flag.String("out-file", "", "out file name to write xml")
+	inFile    = flag.String("in-file", "", "specify an input file name to read from")
+	outFile   = flag.String("out-file", "", "out file name to write xml")
+	suiteName = flag.String("suite-name", "", "Suite Name for JUnit report, for dockle report, please use image name, for hadolint -- 'Dockerfile'")
 )
 
 func main() {
 	flag.Parse()
 
-	if flag.NFlag() != 2 {
-		fmt.Fprintf(os.Stderr, "%s does not accept positional arguments\n", os.Args[0])
+	if flag.NFlag() < 3 {
+		fmt.Fprintf(os.Stderr, "Not enough arguments for %s!\n", os.Args[0])
 		flag.Usage()
 		os.Exit(1)
 	}
@@ -55,7 +56,7 @@ func main() {
 	}
 
 	// Generate xml
-	xml_contents := formatter.JUnitReportXML(report)
+	xml_contents := formatter.JUnitReportXML(report, *suiteName)
 
 	// Write generated xml to out file
 	fmt.Printf("Writing: %s\n", *outFile)

@@ -1,6 +1,6 @@
 # Docker Container Scanner
 
-This container include Docker Image Scanner tools like [Trivy](https://github.com/aquasecurity/trivy/) and [Dockle](https://github.com/goodwithtech/dockle/).
+This container include Docker Image Scanner tools like [Trivy](https://github.com/aquasecurity/trivy/) and [Dockle](https://github.com/goodwithtech/dockle/). For Dockerfile linting this image include [hadolint](https://github.com/hadolint/hadolint/)
 
 # What is Trivy
 
@@ -58,7 +58,7 @@ docker run -ti --rm --name docker-scanner \
 and then, inside container, run:
 
 ```
-trivy image --format template --template \"@\${TRIVY_TPL_JUNIT}\" -o junit-report.xml <your-docker-image>
+trivy image --format template --template "@${TRIVY_TPL_JUNIT}" -o junit-report.xml <your-docker-image>
 ```
 
 ## Dockle scan
