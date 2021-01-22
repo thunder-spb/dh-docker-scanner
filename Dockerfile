@@ -1,8 +1,15 @@
+FROM golang:alpine AS builder
+# FROM golang:1.14.2
+COPY scripts/convert2junit .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-w -s" -a -installsuffix cgo -o convert2junit .
+
 FROM alpine:3.12
 
 ARG TOOL_TRIVY_VERSION=0.15.0
 ARG TOOL_DOCKLE_VERSION=0.3.1
 ARG TOOL_HADOLINT_VERSION=1.19.0
+
+COPY --from=builder /go/convert2junit /usr/bin/convert2junit
 
 RUN apk add --no-cache bash
 
