@@ -46,10 +46,22 @@ jobs:
           echo "DH_IMAGE_NAME=${{ secrets.DH_USER }}/${{ env.IMAGE_NAME }}" >> $GITHUB_ENV
           echo "GH_IMAGE_NAME=ghcr.io/${GH_OWNER}/${{ env.IMAGE_NAME }}" >> $GITHUB_ENV
 
+          echo "BUILD_DATE=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+          echo "GIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "GIT_REF=$(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)" >> $GITHUB_ENV
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
         with:
           push: true # Will only build if this is not here
+          labels: |
+            org.opencontainers.image.authors=${{ github.repository_owner }}
+            org.opencontainers.image.created=${{ env.BUILD_DATE }}
+            org.opencontainers.image.description=Created from commit ${{ env.GIT_SHA }} and ref ${{ env.GIT_REF }}
+            org.opencontainers.image.ref.name=${{ env.GIT_REF }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.version=${{ env.IMAGE_VERSION }}
           tags: |
             ${{ env.DH_IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
             ${{ env.DH_IMAGE_NAME }}:latest
