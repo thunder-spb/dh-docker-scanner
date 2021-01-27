@@ -46,5 +46,5 @@ jobs:
           push: true # Will only build if this is not here
           tags: |
             ${{ secrets.DH_USER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
-            ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ github.ref }}
+            ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
             ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME }}:latest
