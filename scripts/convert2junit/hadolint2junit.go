@@ -11,15 +11,16 @@ import (
 )
 
 var (
-	inFile    = flag.String("in-file", "", "specify an input file name to read from")
-	outFile   = flag.String("out-file", "", "out file name to write xml")
-	suiteName = flag.String("suite-name", "", "Suite Name for JUnit report, for dockle report, please use image name, for hadolint -- 'Dockerfile'")
+	inFile  = flag.String("in-file", "", "specify a Hadolint JSON file name to read from")
+	outFile = flag.String("out-file", "", "out file name to write xml")
 )
 
 func main() {
+	fmt.Println("Hadolint JSON report converter into JUnit xml format")
+
 	flag.Parse()
 
-	if flag.NFlag() < 3 {
+	if flag.NFlag() < 2 {
 		fmt.Fprintf(os.Stderr, "Not enough arguments for %s!\n", os.Args[0])
 		flag.Usage()
 		os.Exit(1)
@@ -49,14 +50,14 @@ func main() {
 	bytes, _ := ioutil.ReadAll(j)
 
 	// Parse input json data
-	report, err := parser.Parse(bytes)
+	report, err := parser.ParseHadolint(bytes)
 	if err != nil {
 		fmt.Printf("ERROR: Error parsing input: %s\n", err)
 		os.Exit(1)
 	}
 
 	// Generate xml
-	xml_contents := formatter.JUnitReportXML(report, *suiteName)
+	xml_contents := formatter.JUnitReportXML(report, "Dockerfile")
 
 	// Write generated xml to out file
 	fmt.Printf("Writing: %s\n", *outFile)
