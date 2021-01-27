@@ -28,12 +28,15 @@ jobs:
           username: ${{ secrets.DH_USER }}
           password: ${{ secrets.DH_REGISTRY }}
 
+      - name: Get the version from tags for DockerHub
+        id: version
+        run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
+
       - name: Build and Push Docker Image
-        pre: echo ::save-state name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
         uses: docker/build-push-action@v2
         with:
           push: true # Will only build if this is not here
           tags: |
-            ${{ secrets.DH_USER }}/${{ env.image_name }}:${{ env.STATE_RELEASE_VERSION }}
+            ${{ secrets.DH_USER }}/${{ env.image_name }}:${{ steps.version.output.tag }}
             ghcr.io/${{ github.repository_owner }}/${{ env.image_name }}:${{ github.ref }}
             ghcr.io/${{ github.repository_owner }}/${{ env.image_name }}:latest
