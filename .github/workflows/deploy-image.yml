@@ -28,7 +28,7 @@ jobs:
           username: ${{ secrets.DH_USER }}
           password: ${{ secrets.DH_REGISTRY }}
 
-      - name: Get the version from tags for DockerHub
+      - name: Prepare convenient Environment variables
         id: version
         run: |
           # Strip git ref prefix from version
