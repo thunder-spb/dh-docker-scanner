@@ -1,11 +1,12 @@
 # Docker Container Scanner
 
-![GitHub last commit](https://img.shields.io/github/last-commit/thunder-spb/dh-docker-scanner)
-![Docker Image Version (latest semver)](https://img.shields.io/docker/v/thunderspb/docker-scanner?sort=semver)
-![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/thunderspb/docker-scanner?sort=semver)
-![Docker Pulls](https://img.shields.io/docker/pulls/thunderspb/docker-scanner)
-![Docker Automated build](https://img.shields.io/docker/automated/thunderspb/docker-scanner)
+[![GitHub last commit](https://img.shields.io/github/last-commit/thunder-spb/dh-docker-scanner?style=flat-square)](https://github.com/thunder-spb/dh-docker-scanner/commits/master)
+[![Docker Image Version (latest semver)](https://img.shields.io/docker/v/thunderspb/docker-scanner?style=flat-square&sort=semver)](https://hub.docker.com/r/thunderspb/docker-scanner/tags)
+![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/thunderspb/docker-scanner?style=flat-square&sort=semver)
+![Docker Pulls](https://img.shields.io/docker/pulls/thunderspb/docker-scanner?style=flat-square)
+[![Docker Automated build](https://img.shields.io/docker/automated/thunderspb/docker-scanner?style=flat-square)](https://hub.docker.com/r/thunderspb/docker-scanner/builds)
 [![HitCount](http://hits.dwyl.com/thunderspb/dh-docker-scanner.svg)](http://hits.dwyl.com/thunderspb/dh-docker-scanner)
+[![Go Report Card](https://goreportcard.com/badge/github.com/thunder-spb/dh-docker-scanner)](https://goreportcard.com/report/github.com/thunder-spb/dh-docker-scanner)
 
 This container include Docker Image Scanner tools like [Trivy](https://github.com/aquasecurity/trivy/) and [Dockle](https://github.com/goodwithtech/dockle/). For Dockerfile linting this image include [hadolint](https://github.com/hadolint/hadolint/)
 
