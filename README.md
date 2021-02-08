@@ -1,8 +1,29 @@
 # Docker Container Scanner
 
+![GitHub last commit](https://img.shields.io/github/last-commit/thunder-spb/dh-docker-scanner)
+![Docker Image Version (latest semver)](https://img.shields.io/docker/v/thunderspb/docker-scanner?sort=semver)
+![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/thunderspb/docker-scanner?sort=semver)
+![Docker Pulls](https://img.shields.io/docker/pulls/thunderspb/docker-scanner)
+![Docker Automated build](https://img.shields.io/docker/automated/thunderspb/docker-scanner)
+[![HitCount](http://hits.dwyl.com/thunderspb/dh-docker-scanner.svg)](http://hits.dwyl.com/thunderspb/dh-docker-scanner)
+
 This container include Docker Image Scanner tools like [Trivy](https://github.com/aquasecurity/trivy/) and [Dockle](https://github.com/goodwithtech/dockle/). For Dockerfile linting this image include [hadolint](https://github.com/hadolint/hadolint/)
 
-As a bonus, this image also has 2 binaries which help to convert Dockle and Hadolint JSON output into JUnit report -- `dockle2junit` and `hadolint2junit`. Both located in `/usr/bin`. See usage examples below. Source code you can find under `scripts/convert2junit` directory.
+As a bonus, this image also has 2 binaries which help to convert Dockle and Hadolint JSON output into JUnit report -- `dockle2junit` and `hadolint2junit`. Both located in `/usr/bin`. See usage examples below.
+
+Source code of those tools you can find under `scripts/convert2junit` directory.
+
+Image available on DockerHub:
+
+```
+docker pull thunderspb/docker-scanner:latest
+```
+
+and on GitHub Container Registry:
+
+```
+docker pull ghcr.io/thunder-spb/docker-scanner:latest
+```
 
 # What is Trivy
 
@@ -10,7 +31,7 @@ As a bonus, this image also has 2 binaries which help to convert Dockle and Hado
 
 Project homepage and documentation is here: https://github.com/aquasecurity/trivy/
 
-In addition, this image include JUnit report template which could be consumed by CI system, like Jenkins.
+In addition, this image include JUnit report template to generate JUnit XML Report, which could be consumed by CI system, like Jenkins.
 
 # What is Dockle
 
@@ -43,10 +64,16 @@ Here is some examples on how to run scans within this container.
 
 ## Trivy scan
 
-Pull this image by invoking this command:
+Pull this image from DockerHub by invoking this command:
 
 ```
 docker pull thunderspb/docker-scanner
+```
+
+or you can pull it from GitHub Container Registry:
+
+```
+docker pull ghcr.io/thunder-spb/docker-scanner:latest
 ```
 
 Attach to pulled container with mounting docker socket:
@@ -66,10 +93,16 @@ trivy image --format template --template "@${TRIVY_TPL_JUNIT}" -o junit-report.x
 
 ## Dockle scan
 
-Pull this image by invoking this command:
+Pull this image from DockerHub by invoking this command:
 
 ```
 docker pull thunderspb/docker-scanner
+```
+
+or you can pull it from GitHub Container Registry:
+
+```
+docker pull ghcr.io/thunder-spb/docker-scanner:latest
 ```
 
 Attach to pulled container with mounting docker socket:
@@ -168,10 +201,16 @@ Now, you can order your CI system consume this file :)
 
 This tool scans Dockerfile, not the image, so working directory should contain your Dockerfile.
 
-Pull this image by invoking this command:
+Pull this image from DockerHub by invoking this command:
 
 ```
 docker pull thunderspb/docker-scanner
+```
+
+or you can pull it from GitHub Container Registry:
+
+```
+docker pull ghcr.io/thunder-spb/docker-scanner:latest
 ```
 
 Attach to pulled container with mounting docker socket:
@@ -179,7 +218,6 @@ Attach to pulled container with mounting docker socket:
 ```
 docker run -ti --rm --name docker-scanner \
   -v ${PWD}:/work -w /work \
-  -v /var/run/docker.sock:/var/run/docker.sock \
   thunderspb/docker-scanner /bin/bash
 ```
 
@@ -292,6 +330,10 @@ Now, you can order your CI system consume this file :)
 # Github home
 
 Sources: https://github.com/thunder-spb/dh-docker-scanner
+
+# GitHub Registry
+
+Here is the link on GitHub Container Registry: https://github.com/users/thunder-spb/packages/container/package/docker-scanner
 
 # Docker Hub home
 
