@@ -1,14 +1,14 @@
 FROM golang:alpine AS builder
 # FROM golang:1.14.2
 COPY scripts/convert2junit .
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-w -s" -a -installsuffix cgo -o dockle2junit dockle2junit.go
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-w -s" -a -installsuffix cgo -o hadolint2junit hadolint2junit.go
+RUN GO111MODULE=off CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-w -s" -a -installsuffix cgo -o dockle2junit dockle2junit.go
+RUN GO111MODULE=off CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-w -s" -a -installsuffix cgo -o hadolint2junit hadolint2junit.go
 
-FROM alpine:3.12
+FROM alpine:3.15
 
-ARG TOOL_TRIVY_VERSION=0.15.0
-ARG TOOL_DOCKLE_VERSION=0.3.1
-ARG TOOL_HADOLINT_VERSION=1.19.0
+ARG TOOL_TRIVY_VERSION=0.23.0
+ARG TOOL_DOCKLE_VERSION=0.4.3
+ARG TOOL_HADOLINT_VERSION=2.8.0
 
 COPY --from=builder /go/dockle2junit /usr/bin/dockle2junit
 COPY --from=builder /go/hadolint2junit /usr/bin/hadolint2junit
