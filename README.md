@@ -53,10 +53,10 @@ Project homepage and documentation is here: https://github.com/hadolint/hadolint
 
 # Versions
 
-- Alpine version: _3.12_
-- Trivy (`trivy`) version: _0.15.0_, Home: https://github.com/aquasecurity/trivy/
-- Dockle (`dockle`) version: _0.3.1_, Home: https://github.com/goodwithtech/dockle/
-- Hadolint (`hadolint`) version: _1.19.0_, Home: https://github.com/hadolint/hadolint/
+- Alpine version: _3.15_
+- Trivy (`trivy`) version: _0.23.0_, Home: https://github.com/aquasecurity/trivy/
+- Dockle (`dockle`) version: _0.4.3_, Home: https://github.com/goodwithtech/dockle/
+- Hadolint (`hadolint`) version: _2.8.0_, Home: https://github.com/hadolint/hadolint/
 - Dockle and Hadolint converters (`dockle2junit`, `hadolint2junit`) -- not versioned, Home: https://github.com/thunder-spb/dh-docker-scanner/tree/master/scripts/convert2junit
 
 # Usage
